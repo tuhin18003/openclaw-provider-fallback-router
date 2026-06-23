@@ -1,0 +1,83 @@
+{
+  "id": "provider-fallback-router",
+  "name": "Provider Fallback Router",
+  "kind": "provider-router",
+  "activation": {
+    "onStartup": true
+  },
+  "uiHints": {
+    "enabled": {
+      "label": "Enabled",
+      "help": "Enable or disable the fallback router without uninstalling it"
+    },
+    "primaryProvider": {
+      "label": "Primary Provider",
+      "help": "The provider to use first (e.g. \"codex\"). When this provider hits a rate limit, quota, or auth error, requests are routed to the fallback."
+    },
+    "fallbackChain": {
+      "label": "Fallback Chain",
+      "help": "Ordered list of fallback providers to try when the primary fails (e.g. [\"claude-code\"])"
+    },
+    "cooldownMinutes": {
+      "label": "Cooldown (minutes)",
+      "help": "How long to skip a failed provider after a detected failure. During this window the fallback is used directly without retrying the primary."
+    },
+    "errorPatterns": {
+      "label": "Error Patterns",
+      "help": "Text patterns that trigger a fallback. Plain strings are case-insensitive substring matches. Use \"/regex/flags\" format for regular expressions."
+    },
+    "injectStatusHint": {
+      "label": "Inject Status Hint",
+      "help": "When enabled, a system-prompt notice is prepended when the primary provider is in cooldown, informing the agent of the recommended fallback."
+    },
+    "stateFile": {
+      "label": "State File Path",
+      "help": "Override the cooldown state file location. Default: ~/.openclaw/fallback-router.state.json"
+    }
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "enabled": {
+        "type": "boolean",
+        "description": "Enable or disable the plugin"
+      },
+      "primaryProvider": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Provider to use first (e.g. \"codex\")"
+      },
+      "fallbackChain": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "minItems": 1,
+        "description": "Ordered list of fallback providers"
+      },
+      "cooldownMinutes": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 10080,
+        "description": "Minutes to skip a failed provider (1–10080 = 1 week)"
+      },
+      "errorPatterns": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Strings or /regex/flags patterns that trigger fallback"
+      },
+      "injectStatusHint": {
+        "type": "boolean",
+        "description": "Prepend a system-prompt notice when primary is in cooldown"
+      },
+      "stateFile": {
+        "type": "string",
+        "description": "Override path to cooldown state file"
+      }
+    }
+  }
+}

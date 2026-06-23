@@ -1,0 +1,65 @@
+{
+  "name": "openclaw-provider-fallback-router",
+  "version": "0.1.0",
+  "description": "Provider fallback routing for OpenClaw — detects rate limits, quota errors, and auth failures to automatically switch providers",
+  "type": "module",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "author": "",
+  "keywords": [
+    "openclaw",
+    "openclaw-plugin",
+    "provider",
+    "fallback",
+    "router",
+    "codex",
+    "claude-code",
+    "rate-limit",
+    "quota",
+    "ai"
+  ],
+  "scripts": {
+    "build": "esbuild index.ts --bundle --platform=node --target=node22 --format=esm --outfile=dist/index.js --external:openclaw --minify-whitespace",
+    "typecheck": "tsc --noEmit --pretty false",
+    "release:verify": "npm run typecheck && npm run build && npm pack --dry-run"
+  },
+  "files": [
+    "dist/",
+    "openclaw.plugin.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "esbuild": "^0.28.0",
+    "typescript": "^5.7.0"
+  },
+  "peerDependencies": {
+    "openclaw": ">=2026.5.28"
+  },
+  "peerDependenciesMeta": {
+    "openclaw": {
+      "optional": true
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "openclaw": {
+    "extensions": [
+      "./dist/index.js"
+    ],
+    "compat": {
+      "pluginApi": ">=2026.5.28",
+      "minGatewayVersion": "2026.5.28"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/USERNAME/openclaw-provider-fallback-router.git"
+  },
+  "homepage": "https://github.com/USERNAME/openclaw-provider-fallback-router#readme",
+  "bugs": {
+    "url": "https://github.com/USERNAME/openclaw-provider-fallback-router/issues"
+  }
+}

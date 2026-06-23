@@ -1,0 +1,47 @@
+{
+  "_info": "openclaw-provider-fallback-router example config. Copy to ~/.openclaw/fallback-router.config.json",
+
+  "primaryProvider": "codex",
+  "fallbackChain": ["claude-code"],
+
+  "cooldownMinutes": 60,
+  "logLevel": "info",
+
+  "checkStdout": true,
+  "checkReturnValue": true,
+  "fallbackOnAnyError": false,
+
+  "providerCommands": {
+    "codex": "codex",
+    "claude-code": "claude",
+    "gemini": "gemini"
+  },
+
+  "_patternsNote": "Add plain strings or /regex/flags patterns. Strings are case-insensitive substring matches.",
+  "errorPatterns": [
+    "weekly limit",
+    "daily limit",
+    "usage limit",
+    "limit reached",
+    "limit has been reached",
+    "monthly limit",
+    "quota exceeded",
+    "quota has been exceeded",
+    "insufficient_quota",
+    "rate limit",
+    "rate_limit_exceeded",
+    "too many requests",
+    "429",
+    "auth expired",
+    "login expired",
+    "unauthorized",
+    "token expired",
+    "model login expired",
+    "session expired",
+    "authentication failed",
+    "access denied",
+    "codex limit has been reached",
+    "codex weekly limit",
+    "codex daily limit"
+  ]
+}
